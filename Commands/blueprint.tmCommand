@@ -8,7 +8,7 @@
 	<string>#!/usr/bin/env ruby
 
 require ENV['TM_BUNDLE_SUPPORT'] + "/lib/machinist/mate/blueprint_helper"
-Machinist::Mate::BlueprintHelper.new(ENV['TM_CURRENT_WORD'] || `pbpaste`).generate_blueprint($stdout)</string>
+Machinist::Mate::BlueprintHelper.new(ENV['TM_DIRECTORY']).generate_blueprint(ENV['TM_CURRENT_WORD'] || `pbpaste`)</string>
 	<key>fallbackInput</key>
 	<string>word</string>
 	<key>input</key>
