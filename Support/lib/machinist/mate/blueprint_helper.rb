@@ -14,12 +14,19 @@ module Machinist
         begin
           @current_class_name = current_word.classify
           @current_class = @current_class_name.constantize
+          methods = @current_class.new.attributes.keys
+          methods -= %w[created_at updated_at]
+          methods = methods.map do |method|
+            next method unless method =~ /(.*)_id/
+            $1
+          end
+          methods_str = methods.map { |m| "  #{m}" }.join("\n")
         rescue NameError
           methods_str = "# no model class #{current_class_name} found"
         end
         stdout.puts <<-EOS.gsub(/^        /, '')
         #{current_class_name}.blueprint do
-          #{methods_str}
+          #{methods_str.strip}
         end
         
         EOS
