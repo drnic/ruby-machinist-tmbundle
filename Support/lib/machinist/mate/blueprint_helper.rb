@@ -16,11 +16,15 @@ module Machinist
           @current_class = @current_class_name.constantize
           methods = @current_class.new.attributes.keys
           methods -= %w[created_at updated_at]
-          methods = methods.map do |method|
-            next method unless method =~ /(.*)_id/
-            $1
+          methods.reject! { |method| method =~ /(.*)_id/ }
+          methods_str = methods.map { |m| "  #{m}\n" }.join
+          
+          singular_reflections.each do |method, class_name|
+            methods_str << "  #{method} { #{class_name}.make }\n"
           end
-          methods_str = methods.map { |m| "  #{m}" }.join("\n")
+          has_many_reflections.each do |method, class_name|
+            methods_str << "  #{method} { [ #{class_name}.make ] }\n"
+          end
         rescue NameError
           methods_str = "# no model class #{current_class_name} found"
         end
@@ -46,6 +50,26 @@ module Machinist
       protected
       def project_root
         @project_root ||= find_project_dir(@current_dir)
+      end
+      
+      # Returns list of [belongs_to_method, class_name]
+      def singular_reflections
+        @current_class.reflections.inject([]) do |mem, pair|
+          name, reflection = pair
+          next mem unless [:belongs_to, :has_one].include?(reflection.macro)
+          mem << [name, reflection.class_name]
+          mem
+        end
+      end
+
+      # Returns list of [has_many_method, class_name]
+      def has_many_reflections
+        @current_class.reflections.inject([]) do |mem, pair|
+          name, reflection = pair
+          next mem unless [:has_many, :has_and_belongs_to_many].include?(reflection.macro)
+          mem << [name, reflection.class_name]
+          mem
+        end
       end
     end
   end

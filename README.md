@@ -11,15 +11,12 @@ Consider a BlogPost that has many BlogComments in a blog app. If you go to your 
     BlogPost.blueprint do
       title
       body
+      author { BlogAuthor.make }
+      comments { [ BlogComment.make ] }
+      tags { [ Tag.make ] }
     end
 
-Classes with foreign keys will generate a blueprint field too (see `blog_post` below):
-
-    BlogComment.blueprint do
-      blog_post
-      comment
-    end
-
+All associations are included with useful starting points.
 
 ## Installation
 
