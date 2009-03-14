@@ -37,3 +37,17 @@ To install without Git:
     rm drnic-ruby-machinist-tmbundle*.tar.gz
     mv drnic-ruby-machinist-tmbundle* "Ruby on Rails.tmbundle"
     osascript -e 'tell app "TextMate" to reload bundles'
+
+## Contributions
+
+Development of Ruby Machinist.tmbundle is sponsored by:
+
+* [GlobalHand](http://globalhand.org/)
+* [Mocra](http://mocra.com/)
+
+Contributors include:
+
+* [Dr Nic Williams](http://drnicwilliams.com)
+
+## License
+
