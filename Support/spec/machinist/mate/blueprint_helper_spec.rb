@@ -22,8 +22,8 @@ module Machinist
             BlogAuthor.blueprint do
               name
               blog_post { BlogPost.make }
-              blog_posts { [ BlogPost.make ] }
               blog_comments { [ BlogComment.make ] }
+              blog_posts { [ BlogPost.make ] }
             end
 
             EOS
@@ -41,8 +41,8 @@ module Machinist
           it "should render a blueprint" do
             @stdout.should == <<-EOS.gsub(/^            /, '')
             BlogPost.blueprint do
-              title
               body
+              title
               author { BlogAuthor.make }
               comments { [ BlogComment.make ] }
               tags { [ Tag.make ] }
@@ -111,6 +111,27 @@ module Machinist
           it "should find config/boot.rb file" do
             expected = File.expand_path(File.dirname(__FILE__) + '/../../../fixtures/some_rails_app')
             expected.should == @helper.find_project_dir(@current_dir)
+          end
+        end
+      end
+      describe "#generate_blueprint_from_db" do
+        describe "for parent class BlogAuthor" do
+          before(:each) do
+            @stdout = StringIO.new
+            mock = mock('BlogAuthor', :name => "Dr Nic")
+            BlogAuthor.should_receive(:first).and_return(mock)
+            @blueprint = @helper.generate_blueprint_from_db('BlogAuthor', @stdout)
+            @stdout.rewind
+            @stdout = @stdout.read
+          end
+
+          it "should render a blueprint" do
+            @stdout.should == <<-EOS.gsub(/^            /, '')
+            BlogAuthor.blueprint do
+              name { "Dr Nic" }
+            end
+
+            EOS
           end
         end
       end

@@ -4,6 +4,11 @@
 <dict>
 	<key>name</key>
 	<string>Ruby Machinist</string>
+	<key>ordering</key>
+	<array>
+		<string>270498A3-6DA1-448A-97DD-ED87DE968A31</string>
+		<string>E6C302A3-65DA-4175-B48E-30BDD3AE036A</string>
+	</array>
 	<key>uuid</key>
 	<string>9F00FF74-7FD6-47C4-9BF3-73C1284B2677</string>
 </dict>
