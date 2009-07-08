@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Ruby Machinist Blueprint</string>
+	<key>patterns</key>
+	<array>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.other.context.ruby.machinist.blueprint</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.start-block.ruby.machinist.blueprint</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(.+?\.blueprint)</string>
+			<key>name</key>
+			<string>source.ruby.machinist.blueprint</string>
+		</dict>
+		<dict>
+			<key>include</key>
+			<string>source.ruby</string>
+		</dict>
+	</array>
+	<key>scopeName</key>
+	<string>source.ruby.machinist</string>
+	<key>uuid</key>
+	<string>F26ECFBB-A2E9-4FFE-AD4B-8C251D9916E0</string>
+</dict>
+</plist>
