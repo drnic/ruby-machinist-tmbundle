@@ -21,7 +21,7 @@
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(.+?\.blueprint)</string>
+			<string>(.+?\.blueprint(?:\(:.+\))?)</string>
 			<key>name</key>
 			<string>source.ruby.machinist.blueprint</string>
 		</dict>
